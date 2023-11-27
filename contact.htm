@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/contact.css">
+    <link rel="stylesheet" href="CSS/hme.css">
+    <title>Contact Us</title>
+</head>
+<body>
+
+<!--Beginnging of header-->
+
+<header class="c0">
+    <div class="lg" >
+        <img src="media/logo.png" width="100px" height="100px"> 
+    </div>
+    
+    <div class="menu-btn"></div>
+    <div class="navigation">
+        <div class="navigation-items">
+            <a href="hme.htm">Home</a>
+            <a href="events.htm">Events</a>
+            <a href="about.htm">About Us</a>
+            <a href="contact.htm">Contact Us</a>
+            <button style="margin-left: 25px;" type="button" id="signoutbutton">Sign Out</button>
+
+            
+    </div>
+    </div>
+
+</header>
+<!--End of header--><br><br><br><br>
+ 
+<!--First Section-->
+<section>
+        <div class="container">
+            <div class="card">
+              <p>We're excited to connect with you! Your thoughts, questions, and feedback mean the world to us. 
+              Please take a moment to complete the form below. We're eager to hear from you, and we promise to get back to you promptly. Thanks for reaching out!
+                </p>
+            </div>
+          </div>
+<br>
+
+        <div class="container">
+          <div class="text" >
+             Contact us Form
+          </div>
+          <form action="#">
+             <div class="form-row">
+                <div class="input-data">
+                   <input type="text" required>
+                   <div class="underline"></div>
+                   <label for="">First Name</label>
+                </div>
+                <div class="input-data">
+                   <input type="text" required>
+                   <div class="underline"></div>
+                   <label for="">Last Name</label>
+                </div>
+             </div>
+             <div class="form-row">
+                <div class="input-data">
+                   <input type="text" required>
+                   <div class="underline"></div>
+                   <label for="">Email Address</label>
+                </div>
+                <div class="input-data">
+                   <input type="text" required>
+                   <div class="underline"></div>
+                   <label for="">Inti ID</label>
+                </div>
+             </div>
+             <div class="form-row">
+             <div class="input-data textarea">
+                <textarea rows="8" cols="80" required></textarea>
+                <br />
+                <div class="underline"></div>
+                <label for="">Write your message</label>
+                <br />
+                <div class="form-row submit-btn">
+                   <div class="input-data">
+                      <div class="inner"></div>
+                      <input type="submit" value="submit">
+                   </div>
+                </div>
+          </form>
+          </div>
+
+          </section>
+<!--End of First Section-->
+
+<!--JavaScript-->
+        <script type="text/javascript">
+          //Java for responseive menu
+          const menuBtn = document.querySelector(".menu-btn");
+          const navigation = document.querySelector(".navigation");
+          
+          menuBtn.addEventListener("click", () => {
+            menuBtn.classList.toggle("active");  
+            navigation.classList.toggle("active"); 
+          });
+  
+              //Java for responseive menu
+              const btns = document.querySelectorAll(".nav-btn");
+              const slides = document.querySelectorAll(".video-slide");
+              const contents = document.querySelectorAll(".content");
+  
+  
+              var sliderNav = function(manual){
+  
+                  btns.forEach((btn) => {
+                      btn.classList.remove("active");
+                  });
+  
+                  slides.forEach((slide) => {
+                      slide.classList.remove("active");
+                  });
+  
+                  contents.forEach((content) => {
+                      content.classList.remove("active");
+                  });
+  
+  
+                  btns[manual].classList.add("active");
+                  slides[manual].classList.add("active");
+                  contents[manual].classList.add("active");
+  
+              }
+  
+              btns.forEach((btn, i) => {
+                  btn.addEventListener("click", () => {
+                      sliderNav(i);
+                  });
+              })
+      </script>
+<!--End of JavaScript-->
+    
+
+ 
+    
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    ,<link rel="stylesheet" href="CSS/about.css">
+    <link rel="stylesheet" href="CSS/hme.css">
+</head>
+<body>
+
+    <!--Beginnging of header-->
+    <header>
+        <div class="lg" >
+            <img src="media/logo.png" width="100px" height="100px"> 
+        </div>
+        
+        <div class="menu-btn"></div>
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="hme.htm">Home</a>
+                <a href="events.htm">Events</a>
+                <a href="about.htm">About Us</a>
+                <a href="contact.htm">Contact Us</a>
+            <button style="margin-left: 25px;" type="button" id="signoutbutton">Sign Out</button>
+                
+        </div>
+        </div>
+    </header>
+<!--End of header-->  
+
+<!--First Section-->
+<section>
+    <div class="heading">
+        <h1>About Us</h1><br><br>
+        <p>
+            We connect INTI students with impactful NGO projects and events, empowering them to create positive change through community engagement and skill development. Join us in making a difference today.
+            Our platform is designed to connect INTI students with meaningful NGO projects and events, providing a unique opportunity to make a difference in the community while gaining valuable experience and insights.
+            </p>
+    </section>
+<!--End Of First Section-->
+
+<!--Second Section-->
+<section>
+    <div class="container">
+        <section>
+            <div class="about-image">
+         <a href="vlntr.htm">   <img src="media/abt.jpg"></a>
+        </div>
+        
+        <div class="about-content">
+            <h2>Conncting for Care</h2>
+            <p>We believe that being part of something bigger than yourself is a fulfilling and enriching experience. B
+                Connect with like-minded individuals who share your passion for social change. Our platform provides a space for INTI students to network with other students, NGOs, and professionals in the field, creating a strong support system for your social impact journey.
+                Our mission is simple yet powerful: To bridge the gap between INTI students and NGOs, fostering a culture of social responsibility, and empowering students to contribute to causes they are passionate about. We're on a mission to create a platform that not only connects you to impactful projects but also nurtures your social conscience and encourages active involvement in your community.
+            
+                </p><br>
+            
+            <a href="events.htm" class="read-more">Volunteer today!</a>
+        </div>
+    </div>
+</section>
+<!--End of Second Section-->
+
+<!--JavaScript-->
+    <script type="text/javascript">
+        //Java for resposive menu
+        const menuBtn = document.querySelector(".menu-btn");
+        const navigation = document.querySelector(".navigation");
+        
+        menuBtn.addEventListener("click", () => {
+          menuBtn.classList.toggle("active");  
+          navigation.classList.toggle("active"); 
+        });
+
+            //Java for responseive menu
+            const btns = document.querySelectorAll(".nav-btn");
+            const slides = document.querySelectorAll(".video-slide");
+            const contents = document.querySelectorAll(".content");
+
+
+            var sliderNav = function(manual){
+
+                btns.forEach((btn) => {
+                    btn.classList.remove("active");
+                });
+
+                slides.forEach((slide) => {
+                    slide.classList.remove("active");
+                });
+
+                contents.forEach((content) => {
+                    content.classList.remove("active");
+                });
+
+
+                btns[manual].classList.add("active");
+                slides[manual].classList.add("active");
+                contents[manual].classList.add("active");
+
+            }
+
+            btns.forEach((btn, i) => {
+                btn.addEventListener("click", () => {
+                    sliderNav(i);
+                });
+            })
+    </script>
+    
+    <!--Emd of JavaScript-->
+
+   
+</body>
+</html></a>

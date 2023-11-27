@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app-js"></script>
+    <script src="https://www.gstatic/firebasejs/7.14.0/firebase-database-js"></script>
+    <link rel="stylesheet" href="vlntr.css">
+    <title>Volunteer Sign Up</title>
+    <link rel="stylesheet" href="head.css">
+</head>
+<body>
+
+   <section id="header">
+ 
+
+      <!--Beginnging of header-->
+<header>
+  <div class="lg" >
+      <img src="emedia/logo.png" width="100px" height="100px"> 
+  </div>
+  
+  <div class="menu-btn"></div>
+  <div class="navigation">
+      <div class="navigation-items">
+          <a href="../hme.htm">Home</a>
+          <a href="../events.htm">Events</a>
+          <a href="../about.htm">About Us</a>
+          <a href="../contact.htm">Contact Us</a>
+          <button style="margin-left: 25px;" type="button" id="signoutbutton">Sign Out</button>
+
+ 
+          
+                
+        </div>
+  </div>
+</header>
+</section><br><br><br><br>
+<br><br><br><br>
+
+            
+<section>
+   <div class="alert"  role="alert">
+      Succesfully Submitted!
+   </div>
+
+        <div class="container">
+            <div class="card">
+              <p>Make a difference with us! Our mission is powered by people like you. If you're ready to contribute your time and skills, please complete the volunteer signup form below.
+                 We're thrilled to have you on board, and together, we can create positive change in our community
+                </p>
+            </div>
+          </div><br>
+
+        <div class="container">
+          
+         <div class="text" >
+             Volunteer Sign up Form
+          </div>
+
+          <form id="contactForm">
+             <div class="form-row">
+                <div class="input-data">
+                   <input type="text" id="fname" required placeholder="Full Name">
+                   <div class="underline"></div>
+                </div>
+
+                <div class="input-data">
+                   <input type="text" id="intiid" required placeholder="INTI ID">
+                   <div class="underline"></div>
+
+                </div>
+             </div>
+
+             <div class="form-row">
+                <div class="input-data">
+                   <input type="text" id="email" required placeholder="Email">
+                   <div class="underline"></div>
+                </div>
+                
+                <div class="input-data">
+                     <select name="event" id="event">
+                        <option value="">Choose Event</option>
+                        <option value="Animal Welfare">Animal Welfare</option>
+                        <option value="Plastic Bottle Collection">Plastic Bottle Collection</option>
+                        <option value="Drug Free Malaysia">Drug Free Malaysia</option>
+                        <option value="Little Angels Nurturing Care Centre">Little Angels Nurturing Care Centre</option>
+                        <option value="Weekly Activity Session with Survivors of Human-trafficking">Weekly Activity Session with Survivors of Human-trafficking</option>
+                        <option value="Football coaching">Football coaching</option>
+                     
+                     </select>
+                   
+                </div>
+             </div>
+          
+             <div class="form-group">
+               
+                <div class="form-row submit-btn">
+                   <div class="input-data">
+                      <div class="inner"></div>
+                      <input type="submit" id="submit" value="submit">
+                   </div>
+                </div>
+                </div>
+
+          </div>
+
+         </div>
+      </form>
+          </section>
+
+        <script type="text/javascript">
+          //Java for responseive menu
+          const menuBtn = document.querySelector(".menu-btn");
+          const navigation = document.querySelector(".navigation");
+          
+          menuBtn.addEventListener("click", () => {
+            menuBtn.classList.toggle("active");  
+            navigation.classList.toggle("active"); 
+          });
+  
+              //Java for responseive menu
+              const btns = document.querySelectorAll(".nav-btn");
+              const slides = document.querySelectorAll(".video-slide");
+              const contents = document.querySelectorAll(".content");
+  
+  
+              var sliderNav = function(manual){
+  
+                  btns.forEach((btn) => {
+                      btn.classList.remove("active");
+                  });
+  
+                  slides.forEach((slide) => {
+                      slide.classList.remove("active");
+                  });
+  
+                  contents.forEach((content) => {
+                      content.classList.remove("active");
+                  });
+  
+  
+                  btns[manual].classList.add("active");
+                  slides[manual].classList.add("active");
+                  contents[manual].classList.add("active");
+  
+              }
+  
+              btns.forEach((btn, i) => {
+                  btn.addEventListener("click", () => {
+                      sliderNav(i);
+                  });
+              })
+      </script>
+
+<script type="module">
+
+ import { initializeApp } from "firebase/app";
+import { getDatabase, ref, push } from "firebase/database";
+
+
+  
+   const firebaseConfig = {
+    
+      };
+
+
+firebase.initializeApp(firebaseConfig);
+
+const database = getDatabase();
+const ref = database.ref("events");
+
+const VolForm = document.getElementById('VolForm');
+const alert = document.querySelector(".alert");
+
+VolForm.addEventListener("submit", (e) => {
+   e.preventDefault();
+
+   const fname = document.getElementById('fname').value;
+   const emailInp = document.getElementById('emailInp').value;
+   const intiid = document.getElementById('intiid').value;
+   const event = document.getElementById('event').value;
+
+   // Validate the form inputs here
+   if (fname && emailInp && intiid && event) {
+      const newVol = {
+         fullName: fname,
+         email: emailInp,
+         organizationId: intiid,
+         event: event
+      };
+
+      // Save the new volunteer data to the database
+      push(ref, newVol)
+         .then(() => {
+            // Show the success alert
+            alert.style.display = "block";
+
+            // Clear the form inputs
+            VolForm.reset();
+         })
+         .catch((error) => {
+            console.error("Error saving data: ", error);
+         });
+   } else {
+      console.log("Please fill out all the fields.");
+   }
+});
+  
+
+
+ </script>
+
+     
+
+
+
+    
+</body>
+</html>

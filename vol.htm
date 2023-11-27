@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hopeful Hands - Volunteer Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Event/vlntr.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Volunteer Signup</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="VolForm">
+                            <div class="form-group">
+                                <label for="fname">Full Name</label>
+                                <input type="text" id="fname" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailInp">Email</label>
+                                <input type="email" id="emailInp" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="intiid">INTI ID</label>
+                                <input type="text" id="intiid" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="event">Event</label>
+                                <select id="event" class="form-control">
+                                    <option value="">Choose Event</option>
+                                    <option value="Animal Welfare">Animal Welfare</option>
+                                    <option value="Plastic Bottle Collection">Plastic Bottle Collection</option>
+                                    <option value="Drug Free Malaysia">Drug Free Malaysia</option>
+                                    <option value="Little Angels Nurturing Care Centre">Little Angels Nurturing Care Centre</option>
+                                    <option value="Weekly Activity Session with Survivors of Human-trafficking">Weekly Activity Session with Survivors of Human-trafficking</option>
+                                    <option value="Football coaching">Football coaching</option>
+                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Signup</button>
+                            </div>
+                        </form>
+                        <div class="alert alert-success alert-dismissible fade show" style="display: none;" role="alert">
+                            <strong>Success!</strong> You have signed up for the event.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script  type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+
+
+
+const firebaseConfig = {
+apiKey: "AIzaSyCkBH3XI0PDnYtYWPKNdcaM4W9lfggJ5bc",
+authDomain: "hopefulhands-982a8.firebaseapp.com",
+databaseURL: "https://hopefulhands-982a8-default-rtdb.firebaseio.com",
+projectId: "hopefulhands-982a8",
+storageBucket: "hopefulhands-982a8.appspot.com",
+messagingSenderId: "449469219039",
+appId: "1:449469219039:web:ec359dfa2d4d63c894e96a",
+measurementId: "G-2LD0TWHBHM"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase();
+const VolForm = document.getElementById('VolForm');
+const alert = document.querySelector(".alert");
+
+VolForm.addEventListener("submit", (e) => {
+   e.preventDefault();
+
+   const fname = document.getElementById('fname').value;
+   const emailInp = document.getElementById('emailInp').value;
+   const intiid = document.getElementById('intiid').value;
+   const event = document.getElementById('event').value;
+   
+
+   // Validate the form inputs here
+   if (fname && emailInp && intiid && event) {
+      const newVol = {
+         fullName: fname,
+         email: emailInp,
+         intiId: intiid,
+         event: event
+      };
+
+      // Save the new volunteer data to the database
+      push(ref(database, 'volunteers'), newVol)
+         .then(() => {
+            // Show the success alert
+            alert.style.display = "block";
+
+            // Clear the form inputs
+            VolForm.reset();
+         })
+         .catch((error) => {
+            console.error("Error saving data: ", error);
+         });
+   } else {
+      console.log("Please fill out all the fields.");
+   }
+});
+
+
+   
+   </script>
+
+
+</body>
+</html>

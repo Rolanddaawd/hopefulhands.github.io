@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar Section -->
+        <aside>
+            <div class="toggle">
+                <div class="logo">
+                    <h2>Hopeful<span class="danger">Hands</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="admin.htm" >
+                    <span class="material-icons-sharp">
+                        dashboard
+                    </span>
+                    <h3>Dashboard</h3>
+                </a>
+
+                <a href="vlntrlst.htm" class="active">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Volunteer List</h3>                   
+                </a>
+
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        settings
+                    </span>
+                    <h3>Settings</h3>
+                </a>
+
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        logout
+                    </span>
+                    <button style="margin-left: 25px;" type="button" id="signoutbutton">Sign Out</button>
+
+                </a>
+            </div>
+        </aside>
+        <!-- End of Sidebar Section -->
+
+        <!-- Main Content -->
+        <main>
+           
+            <!-- Recent  Table -->
+            <div class="container mt-3" >
+
+                <h2>Recent Volunteers</h2>
+               
+                <table class="Table">
+                    <thead>
+                        <tr>
+                            <th>INTI ID</th>
+                            <th>Event</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="tbody1"></tbody>
+                </table>
+            
+            <a href="#" >Change Status</a>
+            </div>
+            <!-- End of Recent Orders -->
+
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
+                </button>
+                <div class="dark-mode">
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
+                </div>
+
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey, <b>Reza</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+               
+                </div>
+
+            </div>
+            <!-- End of Nav -->
+            <div class="user-profile">
+                <div class="logo">
+                  <img src="logo.png">
+                 
+                    <p>Admin Dashboard</p>
+                </div>
+            </div>
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Events</h2>
+                    <span class="material-icons-sharp">
+                        notifications_none
+                    </span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            volume_up
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Event</h3>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 PM
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification deactive">
+                    <div class="icon">
+                        <span class="material-icons-sharp">
+                            edit
+                        </span>
+                    </div>
+                    <div class="content">
+                        <div class="info">
+                            <h3>Event</h3>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 PM
+                            </small>
+                        </div>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
+                    </div>
+                </div>
+
+                <div class="notification add-reminder">
+                    <div>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
+                        <h3>Add Event</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+        import { getDatabase, get, ref, child, onValue } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-database.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCkBH3XI0PDnYtYWPKNdcaM4W9lfggJ5bc",
+          authDomain: "hopefulhands-982a8.firebaseapp.com",
+          databaseURL: "https://hopefulhands-982a8-default-rtdb.firebaseio.com",
+          projectId: "hopefulhands-982a8",
+          storageBucket: "hopefulhands-982a8.appspot.com",
+          messagingSenderId: "449469219039",
+          appId: "1:449469219039:web:ec359dfa2d4d63c894e96a",
+          measurementId: "G-2LD0TWHBHM"
+        };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    var stdNo = 0;
+    var tbody  = document.getElementById('tbody1');
+    
+   function AddItemToTable(Fname,Emailinp, IntiId, Events){
+       let trow = document.createElement("trow");
+       let td1 = document.createElement('td');
+       let td2 = document.createElement('td');
+       let td3 = document.createElement('td');
+       let td4 = document.createElement('td');
+       let td5 = document.createElement('td');
+
+   
+       td1.innerHTML= stdNo;
+       td2.innerHTML= Fname;
+       td3.innerHTML= Emailinp;
+       td4.innerHTML= IntiId;
+       td5.innerHTML= Events;
+   
+       trow.appendChild(td1);
+       trow.appendChild(td2);
+       trow.appendChild(td3);
+       trow.appendChild(td4);
+       trow.appendChild(td5);
+   
+   
+       tbody.appendChild(trow);
+   }
+   
+   function AddAllItemsToTable(TheStudent){
+       stdNo= 0;
+       tbody.innerHTML="";
+       TheStudent.forEach(element => {
+           AddItemToTable(element.email, element.event, element.fullName, element.intiId);
+       });
+   }
+
+   function GetAllDataOnce(){
+    const dbRef = ref(db);
+
+    get(child(dbRef, "volunteers"))
+    .then((snapshot) => {
+        var students = []
+
+        snapshot.forEach(childSnapshot =>{
+            students.push(childSnapshot.val());
+        });
+        AddAllItemsToTable(students);
+    })
+   }
+
+   window.onload = GetAllDataOnce;
+</script>
+
+</body>
+
+</html>
